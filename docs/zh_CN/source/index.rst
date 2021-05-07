@@ -5,7 +5,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to deepchemCN's documentation!
+欢迎来到DeepChem中文文档教程
 ======================================
 
 
@@ -60,7 +60,7 @@ DeepChem可能没有解决这些问题的现成模型。
 .. toctree::
    :glob:
    :maxdepth: 1
-   :caption: Get Started
+   :caption: 入门教程
 
    get_started/installation
    get_started/requirements
@@ -71,7 +71,7 @@ DeepChem可能没有解决这些问题的现成模型。
 .. toctree::
    :glob:
    :maxdepth: 1
-   :caption: Development Guide
+   :caption: 开发者教程
 
    development_guide/licence
    development_guide/scientists
@@ -81,7 +81,7 @@ DeepChem可能没有解决这些问题的现成模型。
 .. toctree::
    :glob:
    :maxdepth: 1
-   :caption: API Reference
+   :caption: 高级教程
 
    api_reference/data
    api_reference/moleculenet

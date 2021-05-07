@@ -1,16 +1,20 @@
-Installation
+安装
 ============
 
-Stable version
+稳定版本
 --------------
 
-Please install tensorflow ~2.4 before installing deepchem.
+
+安装deepchem之前先安装tensorflow 2.4 版本。
+
+笔者建议使用conda管理各种python项目的环境。
+
 
 .. code-block:: bash
 
+    conda create --name py37deepchem python=3.7 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
     pip install tensorflow~=2.4
 
-Then, you install deepchem via pip or conda.  
 
 .. code-block:: bash
 
