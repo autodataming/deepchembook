@@ -27,11 +27,12 @@ DeepChem是一个大型的python模块库，因此我们不会涵盖所有内容
 数据处理
 -------------
 
-The :code:`dc.data` module contains utilities to handle :code:`Dataset`
-objects. These :code:`Dataset` objects are the heart of DeepChem.
-A :code:`Dataset` is an abstraction of a dataset in machine learning. That is,
-a collection of features, labels, weights, alongside associated identifiers.
-Rather than explaining further, we'll just show you.
+:code:`dc.data` 模块包含了处理   :code:`Dataset` 对象的工具。
+:code:`Dataset` 对象是DeepChem的核心。
+
+A :code:`Dataset` 包含了常用的机器学习数据集。  is an abstraction of a dataset in machine learning. 
+数据集中包含特征，标签，权重以及相关的标识符。
+与其进一步详细说明，不如直接向您展示相应的数据集。
 
 .. doctest:: 
 
@@ -47,9 +48,10 @@ Rather than explaining further, we'll just show you.
    >>> dataset.y.shape
    (50,)
 
-Here we've used the :code:`NumpyDataset` class which stores datasets in memory.
-This works fine for smaller datasets and is very convenient for experimentation,
-but is less convenient for larger datasets. For that we have the :code:`DiskDataset` class.
+这里我使用了 :code:`NumpyDataset` 类，将相应的数据集会导入到内存中。
+这对于对于在小规模的数据集进行探索非常方便，但是对于较大的数据集则不太方便。 
+
+对于较大的数据集，我们推荐使用  :code:`DiskDataset` 这个类。
 
 .. doctest::
 
@@ -59,18 +61,20 @@ but is less convenient for larger datasets. For that we have the :code:`DiskData
    >>> dataset.y.shape
    (50,)
 
-In this example we haven't specified a data directory, so this :code:`DiskDataset` is written
-to a temporary folder. Note that :code:`dataset.X` and :code:`dataset.y` load data
-from disk underneath the hood! So this can get very expensive for larger datasets.
+
+在这里示例中，我们并没有显式地指定数据目录， :code:`DiskDataset` 类会默认把数据写到临时目录中。请注意，dataset.X和dataset.y从磁盘加载数据！因此，对于较大的数据集，这可能会非常耗时。 
 
 
 特征工程
 -------------------
 
-"Featurizer" is a chunk of code which transforms raw input data into a processed
-form suitable for machine learning. The :code:`dc.feat` module contains an extensive collection
-of featurizers for molecules, molecular complexes and inorganic crystals.
-We'll show you the example about the usage of featurizers.
+“特征化”的代码的功能是将原始输入数据转换为适合机器学习的形式。 
+
+
+:code:`dc.feat` 模块包含大量对分子，分子配合物和无机晶体进行特征化的工具代码。
+ 
+这里我们展示一个使用 :code:`dc.feat` 模块对分子进行特征化的案例。
+
 
 .. doctest::
 
@@ -90,12 +94,13 @@ We'll show you the example about the usage of featurizers.
    >>> len(dataset)
    5
 
-Here, we've used the :code:`CircularFingerprint` and converted SMILES to ECFP.
-The ECFP is a fingerprint which is a bit vector made by chemical structure information
-and we can use it as the input for various models.
+这里我们使用 :code:`CircularFingerprint` 代码将 SMILES 转换成了 ECFP。
 
-And then, you may have a CSV file which contains SMILES and property like HOMO-LUMO gap. 
-In such a case, by using :code:`DataLoader`, you can load and featurize your data at once.
+ECFP由化学结构信息制成的位向量指纹，我们可以将其用作各种模型的输入。 
+
+假设，你有一个csv文件，里面包含了SMILES和HOMO-LUMO的gap性质。
+
+在这种情况下，通过使用 :code:`DataLoader` 代码，您可以很方便地加载数据并对其特征化。 
 
 .. doctest::
 
@@ -119,10 +124,10 @@ In such a case, by using :code:`DataLoader`, you can load and featurize your dat
 数据分割
 --------------
 
-The :code:`dc.splits` module contains a collection of scientifically aware splitters.
-Generally, we need to split the original data to training, validation and test data
-in order to tune the model and evaluate the model's performance.
-We'll show you the example about the usage of splitters.
+:code:`dc.splits` 模块包含了大量的数据分割工具。
+通常，我们需要将数据集划分为训练集、验证集和测试集进行训练模型和测试模型。
+
+下面我们会为你展示一个数据分割的使用案例。
 
 .. doctest::
 
@@ -138,21 +143,24 @@ We'll show you the example about the usage of splitters.
    >>> len(test_dataset)
    1
 
-Here, we've used the :code:`RandomSplitter` and splitted the data randomly
-in the ratio of train:valid:test = 3:1:1. But, the random splitting sometimes
-overestimates  model's performance, especially for small data or imbalance data.
-Please be careful for model evaluation. The :code:`dc.splits` provides more methods
-and algorithms to evaluate the model's performance appropriately, like cross validation or
-splitting using molecular scaffolds.
+这里我们使用 :code:`RandomSplitter`代码将数据集以3:1:1的形式划分为训练集、验证机和测试集。
+
+注意，随机划分在小数据集或者非平衡数据集等情况，有时会高估模型的性能。
+**请谨慎充分的评估模型**。 
+
+:code:`dc.splits` 模块提供了更多的方法和算法来合理评价模型的性能， 比如交叉验证、基于分子骨架分割数据集。
+
+
 
 
 模型训练和评价
 -----------------------------
 
-The :code:`dc.models` conteins an extensive collection of models for scientific applications. 
-Most of all models inherits  :code:`dc.models.Model` and we can train them by just calling :code:`fit` method.
-You don't need to care about how to use specific framework APIs.
-We'll show you the example about the usage of models.
+:code:`dc.models` 模块包含大量用于科学应用的模型。 
+大部分模型可以从   :code:`dc.models.Model` 中继承而来，
+我们可以通过调用 :code:`fit` 的方法对模型进行训练。
+
+下面，我们将向你展示模型的使用方法。
 
 .. doctest::
 
@@ -168,12 +176,12 @@ We'll show you the example about the usage of models.
    >>> test_preds.shape
    (1,)
 
-Here, we've used the :code:`SklearnModel` and trained the model.
-Even if you want to train a deep learning model which is implemented
-by TensorFlow or PyTorch, calling :code:`fit` method is all you need!
 
-And then, if you use :code:`dc.metrics.Metric`, you can evaluate your model
-by just calling :code:`evaluate` method.
+这里，我们使用了:code:`SklearnModel` 里面的模型，对模型进行了训练，在验证集和测试集上进行了测试。
+即使您想要训练由TensorFlow或PyTorch实现的深度学习模型，也只需调用 :code:`fit` 方法即可！ 
+
+如果您使用  :code:`dc.metrics.Metric`，则可以仅通过调用  :code:`evaluate`  方法来评估模型。 
+
 
 .. doctest::
 
@@ -188,9 +196,11 @@ by just calling :code:`evaluate` method.
 更多教程
 --------------
 
-DeepChem maintains `an extensive collection of addition tutorials <https://github.com/deepchem/deepchem/tree/master/examples/tutorials>`_ that are meant to
-be run on `Google Colab <https://colab.research.google.com/>`_, an online platform that allows you to execute Jupyter notebooks.
-Once you've finished this introductory tutorial, we recommend working through these more involved tutorials.
+DeepChem在github上面维护着大量的`教程 <https://github.com/deepchem/deepchem/tree/master/examples/tutorials>`_, 可在Google Colab <https://colab.research.google.com/>`_上运行，该在线平台可让你很方便地执行Jupyter notebook。 
+
+完成本入门教程后，我们建议您阅读更多的`相关教程 <https://github.com/deepchem/deepchem/tree/master/examples/tutorials>` 。 
+
+
 
 
 
