@@ -7,24 +7,24 @@
 但我们现在让deepchem更广泛地支持所有类型的科学应用)
 
 为什么要使用DeepChem而不是其他的机器学习库？
+简单来说，DeepChem中包含了大量处理科学计算的工具，如加载科学数据集、
+处理数据、变换数据、切割数据、训练数据等。
+DeepChem的底层使用了大量的其他机器学习框架，
+如 `scikit-learn <https://scikit-learn.org/stable/>`_,  `TensorFlow <https://www.tensorflow.org/>`_, 和 `XGBoost <https://xgboost.readthedocs.io/en/latest/>`_.
 
-Why would you want to use DeepChem instead of another machine learning
-library? Simply put, DeepChem maintains an extensive collection of utilities
-to enable scientific deep learning including classes for loading scientific
-datasets, processing them, transforming them, splitting them up, and learning
-from them. Behind the scenes DeepChem uses a variety of other machine
-learning frameworks such as `scikit-learn`_, `TensorFlow`_, and `XGBoost`_. We are
-also experimenting with adding additional models implemented in `PyTorch`_
-and `JAX`_. Our focus is to facilitate scientific experimentation using
-whatever tools are available at hand.
 
-In the rest of this tutorials, we'll provide a rapid fire overview of DeepChem's API.
-DeepChem is a big library so we won't cover everything, but we should give you enough to get started.
+我们也尝试使用 `PyTorch <https://pytorch.org/>`_和`JAX <https://github.com/google/jax>`_中进行训练模型。我们的目的使用各种可得的工具推进科学研究。
 
-.. contents:: Contents
+在本教程的其余部分中，我们将快速概述DeepChem的API。
+
+DeepChem是一个大型的python模块库，因此我们不会涵盖所有内容，
+但我们会给您提供足够的入门资源。 
+
+
+.. contents:: 目录
     :local:
 
-Data Handling
+数据处理
 -------------
 
 The :code:`dc.data` module contains utilities to handle :code:`Dataset`
@@ -64,7 +64,7 @@ to a temporary folder. Note that :code:`dataset.X` and :code:`dataset.y` load da
 from disk underneath the hood! So this can get very expensive for larger datasets.
 
 
-Feature Engineering
+特征工程
 -------------------
 
 "Featurizer" is a chunk of code which transforms raw input data into a processed
@@ -116,7 +116,7 @@ In such a case, by using :code:`DataLoader`, you can load and featurize your dat
    5
 
 
-Data Splitting
+数据分割
 --------------
 
 The :code:`dc.splits` module contains a collection of scientifically aware splitters.
@@ -146,7 +146,7 @@ and algorithms to evaluate the model's performance appropriately, like cross val
 splitting using molecular scaffolds.
 
 
-Model Training and Evaluating
+模型训练和评价
 -----------------------------
 
 The :code:`dc.models` conteins an extensive collection of models for scientific applications. 
@@ -185,17 +185,15 @@ by just calling :code:`evaluate` method.
    >>> test_score = model.evaluate(test_dataset, [metric])
 
 
-More Tutorials
+更多教程
 --------------
 
-DeepChem maintains `an extensive collection of addition tutorials`_ that are meant to
-be run on `Google Colab`_, an online platform that allows you to execute Jupyter notebooks.
+DeepChem maintains `an extensive collection of addition tutorials <https://github.com/deepchem/deepchem/tree/master/examples/tutorials>`_ that are meant to
+be run on `Google Colab <https://colab.research.google.com/>`_, an online platform that allows you to execute Jupyter notebooks.
 Once you've finished this introductory tutorial, we recommend working through these more involved tutorials.
 
-.. _`scikit-learn`: https://scikit-learn.org/stable/
-.. _`TensorFlow`: https://www.tensorflow.org/
-.. _`XGBoost`: https://xgboost.readthedocs.io/en/latest/
-.. _`PyTorch`: https://pytorch.org/
-.. _`JAX`: https://github.com/google/jax
-.. _`an extensive collection of addition tutorials`: https://github.com/deepchem/deepchem/tree/master/examples/tutorials	
-.. _`Google Colab`: https://colab.research.google.com/
+
+
+
+
+
