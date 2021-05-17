@@ -1,10 +1,12 @@
-Tutorials
+教程
 =========
 
-If you're new to DeepChem, you probably want to know the basics. What is DeepChem? 
-Why should you care about using it? The short answer is that DeepChem is a scientific machine learning library. 
-(The "Chem" indicates the historical fact that DeepChem initially focused on chemical applications,
-but we aim to support all types of scientific applications more broadly).
+如果您不熟悉DeepChem，则可能想了解一些基本的问题。如什么是DeepChem？
+您为什么要关心使用它？ 一句话来概括下，DeepChem是一个科学的机器学习库。
+("Chem"表示DeepChem最初专注于化学应用的历史事实，
+但我们现在让deepchem更广泛地支持所有类型的科学应用)
+
+为什么要使用DeepChem而不是其他的机器学习库？
 
 Why would you want to use DeepChem instead of another machine learning
 library? Simply put, DeepChem maintains an extensive collection of utilities
