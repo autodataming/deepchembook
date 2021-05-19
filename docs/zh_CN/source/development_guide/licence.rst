@@ -1,13 +1,16 @@
-Licensing and Commercial Uses
+许可和商业用途 
 =============================
 
-DeepChem is licensed under the MIT License. We actively support
-commercial users. Note that any novel molecules, materials, or other
-discoveries powered by DeepChem belong entirely to the user and not to
-DeepChem developers.
+DeepChem 采用的是MIT许可协议。
+我们允许商业使用DeepChem。
 
-That said, we would very much appreciate a citation if you find our tools useful.
-You can cite DeepChem with the following reference.
+请注意，借助DeepChem发现的任何新颖的分子，材料或其他发明完全属于用户，
+而不属于DeepChem开发人员。请放心大胆的使用DeepChem。
+
+如果您发现我们的工具对你的项目有帮助并且引用我们的工具，我们将不胜感激。
+您可以使用以下参考文献引用DeepChem。 
+
+您可以使用以下参考文献引用DeepChem。 
 
 .. code-block::
 
