@@ -1,16 +1,17 @@
-Examples
+案例
 ========
 
-We show a bunch of examples for DeepChem by the doctest style.
+这里我们会展示DeepChem的一些使用案例。
 
 - We match against doctest's :code:`...` wildcard on code where output is usually ignored
 - We often use threshold assertions (e.g: :code:`score['mean-pearson_r2_score'] > 0.92`),
   as this is what matters for model training code.
 
-.. contents:: Contents
+.. contents:: 目录
     :local:
 
-Before jumping in to examples, we'll import our libraries and ensure our doctests are reproducible:
+
+在进入案例之前，我们需要导入一些常用的模块。
 
 .. doctest:: *
 
@@ -38,14 +39,19 @@ Before jumping in to examples, we'll import our libraries and ensure our doctest
 Delaney (ESOL)
 ----------------
 
-Examples of training models on the Delaney (ESOL) dataset included in `MoleculeNet <./moleculenet.html>`_.
+Delaney（ESOL）是一个回归数据集，其中包含1128种化合物的结构和水溶性数据，
+收录在`MoleculeNet <./moleculenet.html>`_的数据集合中。
+该数据集被广泛用于建立基于分子结构（以SMILES字符串编码）估算溶解度的机器学习模型。
+ 
+我们会使用数据集中的 :code:`smiles` 字段进行训练模型预测实验测得的溶剂化能(:code:`expt`)。
 
-We'll be using its :code:`smiles` field to train models to predict its experimentally measured solvation energy (:code:`expt`).
-
-MultitaskRegressor
+多任务回归模型
 ^^^^^^^^^^^^^^^^^^
 
-First, we'll load the dataset with :func:`load_delaney() <deepchem.molnet.load_delaney>` and fit a :class:`MultitaskRegressor <deepchem.models.MultitaskRegressor>`:
+
+首先，我们会使用 :func:`load_delaney() <deepchem.molnet.load_delaney>` 函数进行加载数据；
+然后通过 :class:`MultitaskRegressor <deepchem.models.MultitaskRegressor>` 类的fit的方法进行训练模型。
+
 
 .. doctest:: delaney
 
@@ -76,11 +82,14 @@ First, we'll load the dataset with :func:`load_delaney() <deepchem.molnet.load_d
     >>> assert valid_scores['mean-pearson_r2_score'] > 0.3, valid_scores
 
 
-GraphConvModel
+图卷积模型
 ^^^^^^^^^^^^^^
-The default `featurizer <./featurizers.html>`_ for Delaney is :code:`ECFP`, short for
-`"Extended-connectivity fingerprints." <./featurizers.html#circularfingerprint>`_
-For a :class:`GraphConvModel <deepchem.models.GraphConvModel>`, we'll reload our datasets with :code:`featurizer='GraphConv'`:
+
+
+对于Delaney数据集默认的特征化`featurizer <./featurizers.html>`_ 方式是 :code:`ECFP`（Extended-connectivity fingerprints） 。
+对于图卷积模型 :class:`GraphConvModel <deepchem.models.GraphConvModel>`，
+我们在加载数据的时候需要显示指定特征化的方式为:code:`featurizer='GraphConv'`。
+
 
 .. doctest:: delaney
 
@@ -101,18 +110,24 @@ For a :class:`GraphConvModel <deepchem.models.GraphConvModel>`, we'll reload our
     >>> assert valid_scores['mean-pearson_r2_score'] > 0.3, valid_scores
 
 
-ChEMBL
-------
+ChEMBL数据集
+--------------
 
-Examples of training models on `ChEMBL`_ dataset included in MoleculeNet.
 
-ChEMBL is a manually curated database of bioactive molecules with drug-like properties.
-It brings together chemical, bioactivity and genomic data to aid the translation
-of genomic information into effective new drugs.
+`ChEMBL <https://www.ebi.ac.uk/chembl/>`_ 数据集是手动收集整理具有类药性质的生物活性分子的数据库。
+它包含了化学、活性、基因组数据（靶点数据），目的是加速从基因组信息寻找有效的药物分子。
+该数据集的22.1版本也已经整合到`MoleculeNet <./moleculenet.html>`_的数据集合中, 里面包含了2个类别 “sparse” 和 “5thresh”  。
+“sparse”是一个大的数据集，包含了 244,245 化合物的化合物的信息。
+正如名字所示的那样，这个数据集中数据非常稀疏，大部分化合物仅仅有一个靶标的活性数据。 
 
-.. _`ChEMBL`: https://www.ebi.ac.uk/chembl
+ “5thresh” 是一个更小的数据集，包含了23,871 化合物的信息，每个化合物至少有5个靶标的活性数据。
 
-MultitaskRegressor
+Examples of training models on `ChEMBL`_  dataset included in MoleculeNet.
+
+下面是基于`ChEMBL <https://www.ebi.ac.uk/chembl/>`_ 数据集进行训练的案例。
+
+
+多任务回归模型
 ^^^^^^^^^^^^^^^^^^
 
 .. doctest:: chembl
@@ -153,7 +168,9 @@ MultitaskRegressor
     >>> valid_scores = model.evaluate(valid_dataset, [avg_rms], transformers)
     >>> assert valid_scores['mean-rms_score'] < 10.00
 
-GraphConvModel
+
+
+图卷积模型 
 ^^^^^^^^^^^^^^
 
 .. doctest:: chembl
@@ -179,3 +196,7 @@ GraphConvModel
     >>>
     >>> valid_scores = model.evaluate(valid_dataset, [avg_rms], transformers)
     >>> assert valid_scores['mean-rms_score'] < 10.00
+
+
+
+    

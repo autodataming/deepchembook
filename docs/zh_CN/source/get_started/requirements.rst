@@ -8,7 +8,7 @@ DeepChem支持python 3.6和python 3.7。
 运行DeepChem必须的依赖模块有：
 
 
-- `joblib < https://pypi.python.org/pypi/joblib>`_ :对于大数据而言，joblib比pickle更加高效，但是joblib只能将对象存储在磁盘文件中，不能保存为字符串。
+- `joblib < https://pypi.python.org/pypi/joblib>`_ :对于大数据而言，joblib比pickle更加高效，但是joblib只能将对象存储在磁盘文件中，不能保存为字符串。使用sklearn中的joblib函数实现模型持久化保存以及提取
 - `NumPy <https://numpy.org/>`_
 - `pandas <http://pandas.pydata.org/>`_
 - `scikit-learn <https://scikit-learn.org/stable/>`_
