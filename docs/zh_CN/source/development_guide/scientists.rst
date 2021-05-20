@@ -1,4 +1,4 @@
-科学家如何对DeepChem做贡献
+科学家和DeepChem
 ======================================
 
 科学圈子在很多方面都非常传统。
@@ -42,118 +42,103 @@ DeepChem可以长期帮助维护新的科学算法，确保学生毕业后继续
 使用自己的软件包而不是使用DeepChem，对我的职业生涯会更好吗？ 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The answer to this really depends on what you're looking for out of
-your career! Making and maintaining good software is hard. It requires
-careful testing and continued maintenance. Your code will bitrot over
-time without attention. If your focus is on new inventions and you
-find software engineering less compelling, working with DeepChem may
-enable you to go further in your career by letting you focus on new
-algorithms and leveraging the DeepChem Project's infrastructure to
-maintain your inventions.
-
-In addition, you may find considerable inspiration from participating
-in the DeepChem community. Looking at how other scientists solve
-problems, and connecting with new collaborators across the world can
-help you look at problems in a new way. Longtime DeepChem contributors
-find that they often end up writing papers together!
-
-All that said, there may be very solid reasons for you to build your
-own project! Especially if you want to explore designs that we haven't
-or can't easily. In that case, we'd still love to collaborate with
-you. DeepChem depends on a broad constellation of scientific packages
-and we'd love to make your package's features accessible to our users.
+答案确实取决于您在职业生涯的目标！ 
+编写和维护好的软件非常难。 
+这个需要仔细测试并持续维护和改进。否则，随着时间的流逝，您的代码将变得毫无用处。 
+如果您专注于新发明，并且发现软件工程的吸引力不强，
+那么与DeepChem一起工作，可能会让您专注于新的算法，并利用DeepChem项目的基础架构来
+维护您的发明，从而加速您的职业发展。 
+此外，您可能会从参与DeepChem社区活动中获得很多启发。
+看看其他科学家如何解决问题，并与世界各地的合作者建立联系可以帮助您以新的方式看待问题。 
+长期的DeepChem贡献者发现，他们经常在一起写论文！ 
+综上所述，在必要的时候可以建立你自己的项目。
+尤其是当你想探索的想法在DeepChem中并没有实现或者很难实现的时候，你需要自己编写相应的代码，
+当然我们也非常乐意和你一起合作。
+DeepChem 依赖于大量的科学软件包，我们也非常乐意让你的软件包被我们的用户使用。
 
 是否有 DeepChem 首席研究员?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-While DeepChem was born in the Pande lab at Stanford,
-the project now lives as a "decentralized research organization."
-It would be more accurate to say that there are informally multiple "DeepChem PIs,"
-who use it in their work. You too can be a DeepChem PI!
+尽管DeepChem诞生于斯坦福大学的Pande 实验室， 但是现在该项目以去中心研究组织的形式存在。
+更准确的说，有多个非正式的"DeepChem PIs"，
+只要你在工作中使用DeepChem,你就是一个DeepChem PI！
+
 
 我是否需要将DeepChem团队成员添加为论文的共同作者？ 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Our suggestion is to use good judgment and usual scientific etiquette.
-If a particular DeepChem team member has contributed a lot to your effort,
-adding them might make sense. If no one person has contributed sufficiently,
-an acknowledgment or citation would be great!
+我们的建议按照通常的科学评价标准决定是否添加DeepChem团队成员添加为论文的共同作者。
+如果某个 DeepChem 团队成员为您的努力做出了巨大贡献，
+添加他们作为论文共同作者可能有意义。
+如果DeepChem团队人员没有直接对你的工作做出足够大的贡献，
+那么只需要致谢或者应用DeepChem就可以了！
 
-I want to establish my scientific niche. How can I do that as a DeepChem contributor? Won't my contribution be lost in the noise?
+
+我想在DeepChem中实现我特定的科研想法。
+作为DeepChem贡献者，我怎样才能不让我的贡献在噪音中丢失吗？
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-It's critically important for a new scientist to establish themselves and
-their contributions in order to launch a scientific career. We believe that
-DeepChem can help you do this! If you add a significant set of new features to DeepChem,
-it might be appropriate for you to write a paper (as lead or corresponding author or however makes sense)
-that introduces the new feature and your contribution.
 
-As a decentralized research organization, we want to help you launch
-your careers. We're very open to other collaboration structures that
-work for your career needs.
+对于新科学家来说，在职业生涯的初期建立自己的科研方向和科学贡献非常重要。
+我们认为DeepChem可以帮到你。
+如果你为DeepChem增加了重要的新功能,这时以第一作者或者通讯作者写一篇论文介绍DeepChem的新功能以及你的贡献将会非常有意义。
+作为一个去中心的组织，我们非常乐意帮助你开启你的职业生涯。
 
-I'm an aspiring scientist, not part of a lab. Can I join DeepChem?
+
+
+我是一位有抱负的科学家，但不是实验室的成员。 我可以加入DeepChem吗？
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Yes! DeepChem's core mission is to democratize the use of deep learning for the sciences.
-This means no barriers, no walls. Anyone is welcome to join and contribute.
-Join our developer calls, chat one-on-one with our scientists,
-many of whom are glad to work with new students. You may form connections that
-help you join a more traditional lab, or you may choose to form your own path.
-We're glad to support either.
-
+当然！ DeepChem的核心任务是使深度学习在科学领域的使用更加方便和自由。
+这意味着没有障碍，没有壁垒。 欢迎任何人加入并做出贡献。
+加入我们的开发人员电话，与我们的科学家一对一聊天，
+他们中的许多人很高兴与新生一起工作。 您可以建立联系
+帮助您加入传统的实验室，或者您可以选择形成自己的独立科研道路。
+不管怎样，我们很高兴为您提供支持。 
 
 DeepChem有基金支持吗
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Not yet, but we're actively looking into getting grants to support DeepChem researchers.
-If you're a PI who wants to collaborate with us, please get in touch!
+目前环没有，但我们正积极寻找基金以支持DeepChem的研究人员。
+如果您是PI,想要和我们合作请与我们联系！
 
 我是工业界的研究员，我可以加入吗？
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Yes! The most powerful features of DeepChem is its community.
-Becoming part of the DeepChem project can let you build a network that lasts across jobs and roles.
-Lifelong employment at a corporation is less and less common. Joining our community will
-let you build bonds that cross jobs and could help you do your job today better too! 
+当然可以，DeepChem最强大的特点是它的社区。
+成为DeepChem的一员，可以更好的帮助你拓展你的职业朋友圈和提高你的技能。
+在公司终身工作越来越不常见。
+加入我们的社区将让你建立跨工作的纽带，并可以帮助你更好的完成你现在的工作。
+
 
 知识产权怎么归属？
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-One of the core goals for DeepChem is to build a shared set of
-scientific resources and techniques that aren't locked up by patents.
-Our hope is to enable your company or organization to leverage
-techniques with less worry about patent infringement.
+DeepChem的核心目标之一是构建一套共享的不被专利锁定的科学资源和技术。
+我们希望使您的公司或组织能够放心的使用DeepChem技术，而不需要对专利侵权的担心。
+作为回报，我们希望您作为一个负责任的社区成员，并投入尽可能多的贡献。
+如果您发现 DeepChem 非常有价值，请考虑贡献一些创新或改进，以便其他人能够从中受益。
+如果你的发明获得了专利，尽量确保你没有DeepChem中的任何东西。
+很多事情都偷偷溜过了专利审查。
+作为一个开源社区，我们没有资源积极保护自己，我们依靠你的判断和帮助！
 
-We ask in return that you act as a responsible community member
-and put in as much as you get out. If you find DeepChem very
-valuable, please consider contributing back some innovations or
-improvements so others can benefit. If you're getting a patent on your
-invention, try to make sure that you don't infringe on anything in
-DeepChem. Lots of things sneak past patent review. As an open source
-community, we don't have the resources to actively defend ourselves
-and we rely on your good judgment and help!
+
+
 
 如果我在内部数据上使用DeepChem，是否需要发布数据？ 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Not at all! DeepChem is released with a permissive MIT license. Any
-analyses you perform belong entirely to you. You are under no
-obligation to release your proprietary data or inventions.
+不需要! DeepChem 采用的是 MIT 许可协议. 
+您利用DeepChem进行的任何分析都完全属于您。您没有义务发布您的专有数据或发明。
 
 如果我要发布数据怎么办？ DeepChem可以提供帮助吗？ 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-If you are interested in open sourcing data, the DeepChem project
-maintains the
-[MoleculeNet](https://deepchem.readthedocs.io/en/latest/moleculenet.html)
-suite of datasets. Adding your dataset to MoleculeNet can be a
-powerful way to ensure that a broad community of users can access your
-released data in convenient fashion. It's important to note that
-MoleculeNet provides programmatic access to data, which may not be
-appropriate for all types of data (especially for clinical or patient
-data which may be governed by regulations/laws). Open source
-datasets can be a powerful resource, but need to be handled with care.
+如果你想开源一部分数据，DeepChem项目中维护了一套开源数据集合[MoleculeNet](https://deepchem.readthedocs.io/en/latest/moleculenet.html)，可以把你的数据加入到这个集合中。
+将您的数据集添加到MoleculeNet数据集和，可以使得大量用户可以方便地访问您发布的数据。 
+请务必注意，MoleculeNet提供了对数据的编程访问，这可能不适用于所有类型的数据（可能受法规/法律约束的数据 如临床或患者的信息）。 
+开源数据集非常有意义，但需要谨慎处理。
 
  MoleculeNet数据集都是关于分子的吗?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Not anymore! Any scientific datasets are welcome in MoleculeNet. At
-some point in the future, we may rename the effort to avoid confusion,
-but for now, we emphasize that non-molecular datasets are welcome too.
+不都是！ MoleculeNet欢迎使用任何科学数据集。
+在将来的某个时候，我们可能会重新命名以避免歧义，但就目前而言，
+我们欢迎加入非分子数据集加入到MoleculeNet中。 
+
 
 MoleculeNet是否允许以不同的许可证发布数据？ 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-MoleculeNet already supports datasets released under different
-licenses. We can make work with you to use your license of choice.
+MoleculeNet已经支持在不同的数据集使用不同的许可协议。
+我们可以与您合作，使用您的数据集由你决定使用哪一个许可协议。
+

@@ -1,18 +1,16 @@
-Coding Conventions
+编码约定
 ==================
 
-Code Formatting
+代码的格式
 ---------------
 
-.. _`YAPF`: https://github.com/google/yapf
+我们使用  `YAPF <https://github.com/google/yapf>`_工具对DeepChem中的所有代码进行格式化。
 
-We use `YAPF`_ to format all of the code in DeepChem.  Although it sometimes
-produces slightly awkward formatting, it does have two major benefits.  First,
-it ensures complete consistency throughout the entire codebase.  And second, it
-avoids disagreements about how a piece of code should be formatted.
+尽管有时会产生一些不自然的格式，但它有两个主要优点。 
+第一，它确保了整个代码库的完全一致性。 
+第二，它避免在如何格式化一段代码方面存在分歧。
 
-Whenever you modify a file, run :code:`yapf` on it to reformat it before
-checking it in.
+当你修改代码文件的时候，再提交到DeepChem库中之前请使用  :code:`yapf` 命令对其进行格式化。
 
 .. code-block:: bash
 
@@ -20,12 +18,16 @@ checking it in.
 
 YAPF is run on every pull request to make sure the formatting is correct, so if
 you forget to do this the continuous integration system will remind you.
+
+
 Because different versions of YAPF can produce different results, it is
-essential to use the same version that is being run on CI.  At present, that
-is 0.22.  We periodically update it to newer versions.
+essential to use the same version that is being run on CI.
+
+At present, that is 0.22.  We periodically update it to newer versions.
+
 
 Linting
--------
+----------
 
 .. _`Flake8`: https://github.com/google/yapf
 
