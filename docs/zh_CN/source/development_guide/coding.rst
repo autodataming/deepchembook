@@ -4,139 +4,114 @@
 代码的格式
 ---------------
 
-我们使用  `YAPF <https://github.com/google/yapf>`_工具对DeepChem中的所有代码进行格式化。
+我们使用  `YAPF <https://github.com/google/yapf>`_ 工具对DeepChem中的所有代码进行格式化。
 
 尽管有时会产生一些不自然的格式，但它有两个主要优点。 
 第一，它确保了整个代码库的完全一致性。 
 第二，它避免在如何格式化一段代码方面存在分歧。
 
-当你修改代码文件的时候，再提交到DeepChem库中之前请使用  :code:`yapf` 命令对其进行格式化。
+当你修改代码文件的时候，
+再提交到DeepChem库中之前请使用 :code:`yapf` 命令对其进行格式化。
 
 .. code-block:: bash
 
   yapf -i <modified file>
 
-YAPF is run on every pull request to make sure the formatting is correct, so if
-you forget to do this the continuous integration system will remind you.
 
+YAPF在每个拉取请求（pull request）上运行，以确保格式正确，
+因此，如果您忘了这样做，持续集成系统( CI )会提醒您。 
+由于不同版本的YAPF可能会产生不同的结果，因此有必要和CI系统上使用相同的版本的YAPF。
+目前使用的YAPF版本是0.22。我们会定期将其更新到罪行版本。
 
-Because different versions of YAPF can produce different results, it is
-essential to use the same version that is being run on CI.
-
-At present, that is 0.22.  We periodically update it to newer versions.
-
-
-Linting
+代码检查
 ----------
+我们使用  `Flake8 <https://github.com/pycqa/flake8>`_ 工具对代码检查。
+代码检查工具基本上提供了这些好处。
 
-.. _`Flake8`: https://github.com/google/yapf
+- 防止出现语法错误或拼写错误 
+- 节省代码审核时间（无需检查未使用的代码或错别字） 
 
-We use `Flake8` to check our code syntax. Lint tools basically provide these benefits.
-
-- Prevent things like syntax errors or typos
-- Save our review time (no need to check unused codes or typos)
-
-Whenever you modify a file, run :code:`flake8` on it.
+当你修改代码的时候, 运行下面的 :code:`flake8` 命令对其进行检查.
 
 .. code-block:: bash
 
   flake8 <modified file> --count
 
-If the command return 0, it means your code pass Flake8 check.
+如果返回0，说明你的代码通过了Flake8的检查。
 
-Docstrings
-----------
+文档字符串（Docstrings）
+--------------------------
+所有类和函数都应包含描述其目的和预期用途的文档字符串。 
+如果不确定要包含多少信息，那就包含尽可能多的信息。
+总是在包括更多而不是更少的方面犯错。 
+比如类的文档字符串解释类要解决的问题，它使用什么算法，以及如何正确使用它。 
+ 在适当情况下，引用相关论文。
 
-All classes and functions should include docstrings describing their purpose and
-intended usage.  When in doubt about how much information to include, always err
-on the side of including more rather than less.  Explain what problem a class is
-intended to solve, what algorithms it uses, and how to use it correctly.  When
-appropriate, cite the relevant publications.
-
-.. _`numpy`: https://numpydoc.readthedocs.io/en/latest/format.html#docstring-standard
-
-All docstrings should follow the `numpy`_ docstring formatting conventions.
+所有的文档字符串的格式可以参照 `numpy <https://numpydoc.readthedocs.io/en/latest/format.html#docstring-standard>`_ 文档字符串的格式.
 
 
-Unit Tests
-----------
+单元测试
+-------------
 
-Having an extensive collection of test cases is essential to ensure the code
-works correctly.  If you haven't written tests for a feature, that means the
-feature isn't finished yet.  Untested code is code that probably doesn't work.
+拥有广泛的测试用例集合对于确保代码正确运行至关重要。
+如果您尚未为某个功能编写测试，则表示该功能尚未完成。 未经测试的代码可能无法正常工作。 
 
-Complex numerical code is sometimes challenging to fully test.  When an
-algorithm produces a result, it sometimes is not obvious how to tell whether the
-result is correct or not.  As far as possible, try to find simple examples for
-which the correct answer is exactly known.  Sometimes we rely on stochastic
-tests which will *probably* pass if the code is correct and *probably* fail if
-the code is broken.  This means these tests are expected to fail a small
-fraction of the time.  Such tests can be marked with the :code:`@flaky`
-annotation.  If they fail during continuous integration, they will be run a
-second time and an error only reported if they fail again.
+复杂的数值代码有时很难进行全面测试。当算法产生结果时，如何无法确定结果是否正确。
+尽可能尝试知道正确答案的简单示例。
 
-If possible, each test should run in no more than a few seconds.  Occasionally
-this is not possible.  In that case, mark the test with the :code:`@pytest.mark.slow`
-annotation.  Slow tests are skipped during continuous integration, so changes
-that break them may sometimes slip through and get merged into the repository.
-We still try to run them regularly, so hopefully the problem will be discovered
-fairly soon.
+Flaky Tests是一种不可靠的测试现象：即在同样的软件代码和配置环境下，得不到确定(有时成功、有时失败)的测试结果。理想情况下，测试结果应该是一致的(Consistent)。一段代码要么就符合预期的运行结果，通过测试；要么就与预期结果不符，测试失败。然而，实际上的质量保证测试会出现完全同样的代码和配置会出现不一致的测试结果。这种现象我们称为flaky test。
+如果它们在连续集成期间失败，则将再次运行它们，并且仅在再次失败时才报告错误。 
+如果可能，每个测试应在不超过几秒钟的时间内完成。 
+有时这是不可能的，这时需要该这类测试加上 :code:`@pytest.mark.slow` 标签。
+在持续集成过程中会跳过慢速测试，因此对慢速测试部分代码的破坏有时会检测不到，被合并到代码库中。
+我们仍然尝试定期运行所有的测试，这样就可以很快就会发现问题。 
 
-Testing Machine Learning Models
+
+测试机器学习模型
 -------------------------------
+在实践中，测试机器学习模型的正确性可能非常棘手。
+在将新的机器学习模型添加到DeepChem时，您应至少添加一些基本类型的单元测试： 
 
-Testing the correctness of a machine learning model can be quite
-tricky to do in practice. When adding a new machine learning model to
-DeepChem, you should add at least a few basic types of unit tests:
+- 过度拟合测试：创建一个小的综合数据集并进行测试，您的模型可以高精度地学习此数据信息。  对于回归和分类任务，这对应训练集上低的错误率；对于生成任务，这应对应于训练数据集上的低损失。
 
-- Overfitting test: Create a small synthetic dataset and test that
-  your model can learn this datasest with high accuracy. For regression
-  and classification task, this should correspond to low training error
-  on the dataset. For generative tasks, this should correspond to low
-  training loss on the dataset.
+- 重新加载测试：检查是否可以将经过训练的模型保存到磁盘并
+重新加载正确。这应该包括检查来自已保存和重新加载的模型的预测是否完全匹配。 
 
-- Reloading test: Check that a trained model can be saved to disk and
-  reloaded correctly. This should involve checking that predictions from
-  the saved and reloaded models matching exactly.
+请注意，单元测试不足以评估模型的实际性能。 
+您也应该在更大的数据集上对模型进行基准测试，并在PR评论中报告您的测试结果。 
 
-Note that unit tests are not sufficient to gauge the real performance
-of a model. You should benchmark your model on larger datasets as well
-and report your benchmarking tests in the PR comments.
 
-Type Annotations
+类型声明
 ----------------
+类型注释是避免错误的重要工具。所有新代码都应为函数参数和返回类型提供类型注释。
 
-Type annotations are an important tool for avoiding bugs.  All new code should
-provide type annotations for function arguments and return types.  When you make
-significant changes to existing code that does not have type annotations, please
-consider adding them at the same time.
-
-.. _`mypy`: http://mypy-lang.org/
-
-We use the `mypy`_ static type checker to verify code correctness.  It is
-automatically run on every pull request.  If you want to run it locally to make
-sure you are using types correctly before checking in your code, :code:`cd` to
-the top level directory of the repository and execute the command
+当您对不带类型注释的现有代码进行重大更改时，请考虑为它们加上类型声明。 
+我们使用  `mypy <http://mypy-lang.org/>`_  静态类型检查器来验证代码正确性。
+在提交PR请求的时候，会自动运行mypy命令对代码进行检查。
+提交代码之前，如果你想在本地对代码类型声明进行检查，通过  :code:`cd` 命令切换到
+项目根目录，然后运行下面的命令。
 
 .. code-block:: bash
 
   mypy -p deepchem --ignore-missing-imports
 
-Because Python is such a dynamic language, it sometimes is not obvious what type
-to specify.  A good rule of thumb is to be permissive about input types and
-strict about output types.  For example, many functions are documented as taking
-a list as an argument, but actually work just as well with a tuple.  In those
-cases, it is best to specify the input type as :code:`Sequence` to accept either
-one.  But if a function returns a list, specify the type as :code:`List` because
-we can guarantee the return value will always have that exact type.
+  因为Python是一种动态语言，有时很难指定变量属于什么类型。
 
-Another important case is NumPy arrays.  Many functions are documented as taking
-an array, but actually can accept any array-like object: a list of numbers, a
-list of lists of numbers, a list of arrays, etc.  In that case, specify the type
-as :code:`Sequence` to accept any of these.  On the other hand, if the function
-truly requires an array and will fail with any other input, specify it as
-:code:`np.ndarray`.
+  一个好的经验法则是可以输入类型不进行严格限定和对输出类型进行严格规定。
 
-The :code:`deepchem.utils.typing` module contains definitions of some types that
-appear frequently in the DeepChem API.  You may find them useful when annotating
-code.
+ 例如，许多函数定义列表(:code:`List`)作为参数，但实际上对元组（:code:`Tuple`）也同样有效。 
+对于这种情况，我们应该定义输入类型为 :code:`Sequence`。 
+
+但是，如果函数返回列表，则将类型指定为:code:`List`，
+因为我们可以保证返回值始终具有该确切类型。 
+
+另一个重要的情况是NumPy数组。 
+
+许多函数接受数组参数，但实际上可以接受任何类似数组的对象：数字列表，数字列表的列表，数组列表等。 
+对于这种情况，我们应该定义输入类型为 :code:`Sequence`。 
+
+另外，如果一个函数必须接受数组，则可以定义输入类型为 :code:`np.ndarray`。 
+
+:code:`deepchem.utils.typing` 模块包含DeepChem API中经常出现的某些类型的定义。 
+您对代码类型进行声明的时候，可能会发现它们很有用。 
+
