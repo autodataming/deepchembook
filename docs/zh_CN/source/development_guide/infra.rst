@@ -1,90 +1,95 @@
-Infrastructures
-===============
+基础架构 （Infrastructures）
+===============================
 
-The DeepChem project maintains supporting infrastructure on a number of
-different services. This infrastructure is maintained by the DeepChem
-development team.
+DeepChem项目的基础架构分布在不同服务上，
+比如github\Conda Forge\Docker Hub\PyPI\Amazon Web Services等。 
+该基础结构由DeepChem开发团队维护。 
 
 GitHub
-------
-The core DeepChem repositories are maintained in the `deepchem`_ GitHub organization.
-And, we use GitHub Actions to build a continuous integration pipeline.
+---------
 
-.. _`deepchem`: https://github.com/deepchem
+DeepChem的核心代码在`deepchem <https://github.com/deepchem>`_ GitHub组织中维护。
+而且，我们使用GitHub Actions建立了一个**持续的集成管道**。 
 
-DeepChem developers have write access to the repositories on this repo and 
-technical steering committee members have admin access.
+
+DeepChem开发人员具有对该存储库中文件具有写访问权限，技术指导委员会成员具有管理访问权限。 
+
+
 
 Conda Forge
------------
-The DeepChem `feedstock`_ repo maintains the build recipe for conda-forge.
+--------------
 
-.. _`feedstock`: https://github.com/conda-forge/deepchem-feedstock
+DeepChem的仓库`feedstock <https://github.com/conda-forge/deepchem-feedstock>`_ 中维护了
+构建conda-forge的deepchem包的方法。
+
+
 
 Docker Hub
-----------
-DeepChem hosts major releases and nightly docker build instances on `Docker Hub`_.
+------------
+DeepChem 在 `Docker Hub <https://hub.docker.com/r/deepchemio/deepchem>`_托管了主要版本和最新版本的镜像文件.
 
-.. _`Docker Hub`: https://hub.docker.com/r/deepchemio/deepchem
+
 
 PyPI
-----
-DeepChem hosts major releases and nightly builds on `PyPI`_.
+-------
+DeepChem也在`PyPI <https://pypi.org/project/deepchem/>`_提供了各种不同版本。
 
-.. _`PyPI`: https://pypi.org/project/deepchem/
+亚马逊web 服务（AWS）
+----------------------
+DeepChem的网站基础设施都是通过不同的AWS 服务器管理的。
+所有DeepChem开发人员都可以通过deepchem-developers IAM角色访问这些服务。（IAM角色控制访问权限。） 
 
-Amazon Web Services
--------------------
+目前，@ rbharath是唯一具有IAM角色管理员访问权限的开发人员，
+但从长远来看，我们应该迁移此角色，以便其他人可以使用这些角色。 
 
-DeepChem's website infrastructure is all managed on AWS through different AWS
-services. All DeepChem developers have access to these services through the
-deepchem-developers IAM role. (An IAM role controls access permissions.) At
-present, @rbharath is the only developer with admin access to the IAM role, but
-longer term we should migrate this so other folks have access to the roles.
 
-S3
-^^
+亚马逊的S3服务器
+^^^^^^^^^^^^^^^^
+亚马逊的S3允许在“buckets”上存储数据
+（可以把buckets当成是文件夹）。
+Deepchem S3的buckets有两个核心数据： 
 
-Amazon's S3 allows for storage of data on "buckets" (Think of buckets like folders.)
-There are two core deepchem S3 buckets:
+  - deepchemdata: 该buckets包含MoleculeNet数据集，预特征化的数据集和预先训练的模型。 
 
-  - deepchemdata: This bucket hosts the MoleculeNet datasets, pre-featurized datasets, 
-    and pretrained models.
+  - deepchemforum:该buckets托管论坛的备份。
+   出于安全原因，该buckets是私有的。
+     论坛本身托管在Digital Ocean云服务器上，目前只有仅@rbharath可以访问的。
+     从长远来看，我们应该将论坛迁移到AWS上，以便所有DeepChem开发人员都可以访问该论坛。
+     The forums themselves are a discord instance. 
+      论坛每天一次将其备份上传到此S3的buckets中。
+     如果论坛崩溃，则可以从此buckets中的备份中还原它们。 
+ 
 
-  - deepchemforum: This bucket hosts backups for the forums. The bucket is private for security reasons.
-    The forums themselves are hosted on a digital ocean instance that only @rbharath currently has access to.
-    Longer term, we should migrate the forums onto AWS so all DeepChem developers can access the forums.
-    The forums themselves are a discord instance. The forums upload their backups to this S3 bucket once a day.
-    If the forums crash, they can be restored from the backups in this bucket.
+AWS的Route 53云域名系统
+^^^^^^^^^^^^^^^^^^^^^^
+deepchem.io网站的DNS由Route 53处理。
+“托管区域” deepchem.io保存了该网站的所有DNS信息。 
 
-Route 53
-^^^^^^^^
-DNS for the deepchem.io website is handled by Route 53. The "hosted zone"
-deepchem.io holds all DNS information for the website.
-
-Certificate Manager
+AWS的证书管理
 ^^^^^^^^^^^^^^^^^^^
-The AWS certificate manager issues the SSL/TLS certificate for the
-\*.deepchem.io and deepchem.io domains.
+
+AWS证书管理器为*.deepchem.io和 deepchem.io 域名提供SSL / TLS证书。
 
 GitHub Pages
-^^^^^^^^^^
-We make use of GitHub Pages to serve our static website. GitHub Pages
-connects to the certificate in Certificate Manager. We set CNAME for
-www.deepchem.io, and an A-record for deepchem.io.
+^^^^^^^^^^^^^^^
+我们利用GitHub Pages服务部署我们的静态网站。
 
-The GitHub Pages repository is [deepchem/deepchem.github.io](https://github.com/deepchem/deepchem.github.io).
+GitHub Pages连接到AWS证书管理器中的证书。
+我们为www.deepchem.io设置了CNAME，为deepchem.io设置了A记录。 
+DeepChem 的GitHub Pages 地址是  [deepchem/deepchem.github.io](https://github.com/deepchem/deepchem.github.io).
 
-GoDaddy
--------
-The deepchem.io domain is registered with GoDaddy. If you change the name
-servers in AWS Route 53, you will need to update the GoDaddy record. At
-present, only @rbharath has access to the GoDaddy account that owns the
-deepchem.io domain name. We should explore how to provide access to the domain
-name for other DeepChem developers.
+GoDaddy域名供应商
+--------------------
+deepchem.io域名在GoDaddy域名供应商那边注册的。
+如果您在AWS Route 53中更改名称服务器，您将需要更新GoDaddy记录。
+目前，只有@rbharath可以访问拥有deepchem.io域名的GoDaddy帐户。
+我们应该探索如何为其他DeepChem开发人员提供对域名的访问权限。 
 
-Digital Ocean
--------------
-The forums are hosted on a digital ocean instance. At present, only @rbharath
-has access to this instance. We should migrate this instance onto AWS so other
-DeepChem developers can help maintain the forums.
+Digital Ocean云主机提供商
+---------------------------
+DeepChem的论坛在Digital Ocean云主机提供商的实例机器上托管。
+目前，只有@rbharath可以访问此实例。
+我们应该将此实例迁移到AWS上，以便其他DeepChem开发人员可以帮助维护论坛。 
+
+
+

@@ -81,7 +81,7 @@ DeepChem可能没有解决这些问题的现成模型。
 .. toctree::
    :glob:
    :maxdepth: 1
-   :caption: 高级教程
+   :caption: API 接口参考
 
    api_reference/data
    api_reference/moleculenet
