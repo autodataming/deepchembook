@@ -1,29 +1,32 @@
 Data
-====
+======
 
 DeepChem :code:`dc.data` provides APIs for handling your data.
 
-If your data is stored by the file like CSV and SDF, you can use the **Data Loaders**.
-The Data Loaders read your data, convert them to features (ex: SMILES to ECFP) and save the features to Dataset class.
-If your data is python objects like Numpy arrays or Pandas DataFrames, you can use the **Datasets** directly.
 
-.. contents:: Contents
+DeepChem中的 :code:`dc.data` 提供了用于处理数据的接口API。 
+如果你的数据存储在CSV或者SDF文件中，你可以使用DeepChem中的数据加载器**Data Loaders**。
+数据加载器（Data Loaders）可以读取你的数据把他们转换成特征（比如把smiles 转换成ECFP指纹），
+把这些特征存储在 Dataset的类中。
+
+
+如果你的数据是python的对象objects比如Numpy数组或者Pandas 的DataFrames类型，你可以直接使用Datesets加载这些数据。
+
+.. contents:: 目录
     :local:
 
 
 Datasets
---------
+----------
 
-DeepChem :code:`dc.data.Dataset` objects are one of the core building blocks of DeepChem programs.
-:code:`Dataset` objects hold representations of data for machine learning and are widely used throughout DeepChem.
-
-The goal of the :code:`Dataset` class is to be maximally interoperable
-with other common representations of machine learning datasets. 
-For this reason we provide interconversion methods mapping from :code:`Dataset` objects
-to pandas DataFrames, TensorFlow Datasets, and PyTorch datasets.
+DeepChem中:code:`dc.data.Dataset`对象是DeepChem程序的核心模块之一。 
+Dataset对象保存了可以用于机器学习的数据表示，并在DeepChem中得到广泛使用。 
+Dataset类的目标是兼容表征各种机器学习数据集。
+为此，我们在:code:`Dataset`中为各种数据类型（pandas DataFrames, TensorFlow Datasets,和 PyTorch datasets）提高了一套相互转换的方法。
 
 NumpyDataset
-^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
+
 The :code:`dc.data.NumpyDataset` class provides an in-memory implementation of the abstract :code:`Dataset`
 which stores its data in :code:`numpy.ndarray` objects.
 
@@ -32,7 +35,8 @@ which stores its data in :code:`numpy.ndarray` objects.
   :inherited-members:
 
 DiskDataset
-^^^^^^^^^^^
+^^^^^^^^^^^^^^^
+
 The :code:`dc.data.DiskDataset` class allows for the storage of larger
 datasets on disk. Each :code:`DiskDataset` is associated with a
 directory in which it writes its contents to disk. Note that a
@@ -54,7 +58,7 @@ for convenient processing of image based datasets.
 
 
 Data Loaders
-------------
+--------------
 
 Processing large amounts of input data to construct a :code:`dc.data.Dataset` object can require some amount of hacking.
 To simplify this process for you, you can use the :code:`dc.data.DataLoader` classes.

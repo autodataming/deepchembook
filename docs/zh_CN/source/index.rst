@@ -55,7 +55,7 @@ DeepChem可能没有解决这些问题的现成模型。
 请尝试为`DeepChem仓库 <https://github.com/deepchem/deepchem>`_提供更多的建议和代码。
 
 
-该文档主要包含以下3个部分：1. 快速入门教程；2. 开发者教程； 3. 高级教程。
+该文档主要包含以下3个部分：1. 快速入门教程；2. 开发者教程； 3. 实践教程。
 
 .. toctree::
    :glob:
@@ -77,6 +77,15 @@ DeepChem可能没有解决这些问题的现成模型。
    development_guide/scientists
    development_guide/coding
    development_guide/infra
+
+   .. toctree::
+   :glob:
+   :maxdepth: 1
+   :caption: 实践教程
+
+   examples/tutorials/01start.rst 
+   examples/tutorials/02start.rst 
+
 
 .. toctree::
    :glob:
