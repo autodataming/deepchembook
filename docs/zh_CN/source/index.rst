@@ -84,7 +84,7 @@ DeepChem可能没有解决这些问题的现成模型。
    :caption: 实践教程
 
    examples/tutorials/01_start.rst 
-
+   examples/tutorials/02_Working_With_Datasets.rst
 
 
 .. toctree::
