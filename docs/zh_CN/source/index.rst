@@ -83,8 +83,8 @@ DeepChem可能没有解决这些问题的现成模型。
    :maxdepth: 2
    :caption: 实践教程
 
-   examples/01start.rst 
-   examples/tutorials/01start.rst 
+   examples/01_start.rst 
+   examples/tutorials/01_start.rst 
 
 
 
