@@ -123,13 +123,8 @@ DeepChem快速入门教程
 我们发现模型在训练集上的得分高于测试集。 
 与在相似但独立的数据上相比，模型在训练的特定数据上的表现通常更好。 
 这就是所谓的“过度拟合”，也是需要在独立的测试集上评估模型至关重要的原因。
-
-
-
 我们的模型在测试集上仍然具有一定的预测能力。 产生完全随机输出的模型的相关性为 0，而做出完美预测的模型的相关性为 1。
 我们的模型有一定的预测能力，所以现在我们可以用它来预测我们关心的其他分子的溶解度性质。 
-
-
 
 由于这只是一个教程，我们没有特别想要预测的任何其他分子，我们对测试集中的前十个分子进行预测。 
 对于每一个分子，我们打印出分子的SMILES字符串、实际溶解度和预测溶解度。
@@ -156,8 +151,6 @@ DeepChem快速入门教程
     Cn2cc(c1ccccc1)c(=O)c(c2)c3cccc(c3)C(F)(F)F [-0.78735524] [-0.76358725]
     ClC(Cl)(Cl)C(NC=O)N1C=CN(C=C1)C(NC=O)C(Cl)(Cl)Cl  [-0.36010832] [-0.64020358]
 
-for molecule, solubility, test_solubility in zip(test_dataset.ids, solubilities, test_dataset.y):
-    print(molecule,solubility, test_solubility)
 
 
 完整代码
@@ -180,6 +173,34 @@ for molecule, solubility, test_solubility in zip(test_dataset.ids, solubilities,
 .. code-block:: bash 
 
     python  01start_dc.py 
+
+
+
+恭喜！欢迎加入DeepChem社区
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+
+恭喜！欢迎加入DeepChem社区
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+恭喜您完成本教程！ 
+如果您喜欢完成本教程，并希望继续使用 DeepChem，
+我们鼓励您完成本系列中的其余教程。
+您还可以通过以下方式帮助 DeepChem 社区： 
+
+1. 为github上面的`DeepChem <https://github.com/deepchem/deepchem>`点赞 ;
+
+这有助于提高DeepChem项目和工具在药物发现社区中的关注度。
+
+
+
+2. 加入DeepChem的`Gitter社区 <https://gitter.im/deepchem/Lobby>`_
+
+DeepChem Gitter 聚集了许多对生命科学领域的深度学习感兴趣的科学家、开发人员和爱好者。 加入和他们一起交流吧。
+
 
 
 
