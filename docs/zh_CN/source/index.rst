@@ -78,11 +78,10 @@ DeepChem可能没有解决这些问题的现成模型。
    development_guide/coding
    development_guide/infra
 
-   .. toctree::
+.. toctree::
    :glob:
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: 实践教程
-
 
    examples/tutorials/01_start.rst 
 
