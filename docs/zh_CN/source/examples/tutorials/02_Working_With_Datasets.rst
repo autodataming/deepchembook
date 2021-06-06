@@ -18,7 +18,7 @@ DeepChem教程2：Datasets的相关操作
 
 数据集（ Dataset）的解读
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-在`上一个教程 <https://deepchembook.readthedocs.io/zh_CN/latest/examples/tutorials/01_start.html>`中，
+在`上一个教程 <https://deepchembook.readthedocs.io/zh_CN/latest/examples/tutorials/01_start.html>`_ 中，
 我们加载了Delaney 数据集中的分子溶解度数据。 现在我们重新加载它。
 
 .. code-block:: python 
@@ -37,6 +37,7 @@ DeepChem教程2：Datasets的相关操作
     print("test_dataset is", test_dataset)
 
 输出：
+
 .. code-block:: console 
 
     test_dataset type is <class 'deepchem.data.datasets.DiskDataset'>
