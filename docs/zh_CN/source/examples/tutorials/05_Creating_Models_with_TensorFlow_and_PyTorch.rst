@@ -1,4 +1,4 @@
-DeepChem教程05：使用PyTorch或者TensorFlow 创建模型 
+DeepChem教程5：使用PyTorch或者TensorFlow 创建模型 
 ==========================================================
 
 
@@ -24,6 +24,8 @@ DeepChem 提供了与 TensorFlow (Keras) 和 PyTorch 的集成使用的接口，
 
 KerasModel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
 
 KerasModel 是 DeepChem 的 Model 类的子类。
 它可以封装tensorflow.keras.Model。
@@ -75,14 +77,14 @@ KerasModel 是 DeepChem 的 Model 类的子类。
 TorchModel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-TorchModel 的工作方式与 KerasModel 类似，不同之处在于它封装的是 torch.nn.Module。
+
+TorchModel 的工作方式与 KerasModel 类似，不同之处在于它对 torch.nn.Module对象进行封装。
 让我们使用 PyTorch 创建另一个模型，就像之前的模型一样，并在相同的数据上对其进行训练。 
 
 .. code-block:: python 
 
     import torch
     import deepchem as dc 
-
     pytorch_model = torch.nn.Sequential(
         torch.nn.Linear(1024, 1000),
         torch.nn.ReLU(),
@@ -93,7 +95,6 @@ TorchModel 的工作方式与 KerasModel 类似，不同之处在于它封装的
 
     tasks, datasets, transformers = dc.molnet.load_delaney(featurizer='ECFP', splitter='random')
     train_dataset, valid_dataset, test_dataset = datasets
-
     metric = dc.metrics.Metric(dc.metrics.pearson_r2_score)
 
     model.fit(train_dataset, nb_epoch=50)
@@ -102,15 +103,12 @@ TorchModel 的工作方式与 KerasModel 类似，不同之处在于它封装的
 
 
 输出：
- 
 .. code-block:: console 
 
-    training set score: {'pearson_r2_score': 0.9797902109595925}
-    test set score: {'pearson_r2_score': 0.7014179421837455}
+    training set score: {'pearson_r2_score': 0.9801558571936799}
+    test set score: {'pearson_r2_score': 0.7105970087297744}
 
-
-
-
+我们可以看到 TorchModel和KerasModel构建的模型，预测能力是相当的。
 
 
 

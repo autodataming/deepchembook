@@ -13,7 +13,14 @@ DeepChem教程06：图卷积（Graph Convolutions ）网络的介绍
 在本教程中，我们将了解有关“图卷积（graph convolutions）”的更多信息。
 这是处理分子数据的最强大的深度学习工具之一。 这样做的原因是分子可以自然地被视为Graph。 
 
-请注意，我们从高中开始习惯的将分子和标准化学图关联在一起。
+请注意，我们从高中开始习惯的将分子和标准化学图关联在一起，如下图所示。
+
+
+.. image:: ./basic_graphs.gif
+	:align: center
+
+
+
 在本教程的其余部分，我们将更详细地深入研究这种关系。 这将使我们更深入地了解这些系统的工作原理。 
 
 
@@ -44,94 +51,79 @@ DeepChem教程06：图卷积（Graph Convolutions ）网络的介绍
 训练图卷积网络
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let's use the MoleculeNet suite to load the Tox21 dataset. To featurize the data in a way that graph convolutional networks can use, we set the featurizer option to 'GraphConv'. The MoleculeNet call returns a training set, a validation set, and a test set for us to use. It also returns tasks, a list of the task names, and transformers, a list of data transformations that were applied to preprocess the dataset. (Most deep networks are quite finicky and require a set of data transformations to ensure that training proceeds stably.)
+
+首先让我们加载 Tox21 数据集。 
+我们将特征化器选项设置为“GraphConv”，以图卷积网络的方式对数据进行特征化。
+:code:`dc.molnet.load_tox21` 函数返回任务（任务名称列表）、数据集（包含训练集、验证集和测试集）。
+ 和转换器（用于预处理数据集的数据转换列表）。 （大多数深度网络都非常挑剔，需要对数据进行转换来确保训练稳定进行。） 
 
 
-
-KerasModel 是 DeepChem 的 Model 类的子类。
-它可以封装tensorflow.keras.Model。
-
-让我们看一个使用它的例子。 
-对于此示例，我们创建了一个由两个连接层组成的简单顺序模型。 
 
 
 .. code-block:: python 
 
-    import deepchem as dc
-    import tensorflow as tf
-
-    keras_model = tf.keras.Sequential([
-        tf.keras.layers.Dense(1000, activation='relu'),
-        tf.keras.layers.Dropout(rate=0.5),
-        tf.keras.layers.Dense(1)
-    ])
-    model = dc.models.KerasModel(keras_model, dc.models.losses.L2Loss())
-
-
-在这个例子中，我们使用了 Keras Sequential 类进行构建模型。 
-我们的模型由带有ReLU激活函数的全链接层组成，提供正则化的 50% dropout 和产生标量输出的最后一层组成。
-我们还需要指定在训练模型时使用的损失函数，在本例中为 L2LOSS 函数。 
-我们现在可以像使用任何其他 DeepChem 模型一样训练和评估模型。 例如，让我们加载 Delaney 溶解度数据集。
- 这个模型基于extended-connectivity fingerprints (ECFPs)预测分子的溶解度的表现如何呢？
-
-.. code-block:: python 
-
-    tasks, datasets, transformers = dc.molnet.load_delaney(featurizer='ECFP', splitter='random')
-    train_dataset, valid_dataset, test_dataset = datasets
-    model.fit(train_dataset, nb_epoch=50)
-    metric = dc.metrics.Metric(dc.metrics.pearson_r2_score)
-    print('training set score:', model.evaluate(train_dataset, [metric]))
-    print('test set score:', model.evaluate(test_dataset, [metric]))
-
-
-输出：
- 
-
-.. code-block:: console 
-
-    training set score: {'pearson_r2_score': 0.9795690217950392}
-    test set score: {'pearson_r2_score': 0.725184181624837}
-
-通过对模型的架构进行调整，模型的预测能力增强。
-
-
-.. code-block:: python 
-
-    import torch
     import deepchem as dc 
 
-    pytorch_model = torch.nn.Sequential(
-        torch.nn.Linear(1024, 1000),
-        torch.nn.ReLU(),
-        torch.nn.Dropout(0.5),
-        torch.nn.Linear(1000, 1)
-    )
-    model = dc.models.TorchModel(pytorch_model, dc.models.losses.L2Loss())
-
-    tasks, datasets, transformers = dc.molnet.load_delaney(featurizer='ECFP', splitter='random')
+    tasks, datasets, transformers = dc.molnet.load_tox21(featurizer='GraphConv')
     train_dataset, valid_dataset, test_dataset = datasets
 
-    metric = dc.metrics.Metric(dc.metrics.pearson_r2_score)
 
+
+
+现在让我们在这个数据集上训练一个图卷积网络。
+DeepChem 有一个 GraphConvModel 类，它封装了一个标准的图卷积架构，以方便用户使用。
+让我们实例化这个类的一个对象并在我们的数据集上训练它。 
+
+.. code-block:: python 
+
+    n_tasks = len(tasks)
+    model = dc.models.GraphConvModel(n_tasks, mode='classification')
     model.fit(train_dataset, nb_epoch=50)
-    print('training set score:', model.evaluate(train_dataset, [metric]))
-    print('test set score:', model.evaluate(test_dataset, [metric]))
+
+
+
+
+让我们尝试评估我们训练的模型。 
+为此，我们需要定义一个指标，即模型性能的衡量标准。 
+:code:`dc.metrics` 已经内置了大量的指标。 
+对于此数据集，衡量标准使用 ROC-AUC 分数，即接收者操作特征曲线下的面积（衡量精度和召回率之间的权衡）。 
+幸运的是，ROC-AUC 也已经集成在 DeepChem 中了。
+
+为了在这个指标下衡量模型的性能，我们可以调用:code:`model.evaluate()`函数对模型进行评价。 
+
+.. code-block:: python 
+
+    metric = dc.metrics.Metric(dc.metrics.roc_auc_score)
+    print('Training set score:', model.evaluate(train_dataset, [metric], transformers))
+    print('Test set score:', model.evaluate(test_dataset, [metric], transformers))
 
 
 输出：
- 
+
+
 .. code-block:: console 
 
-    training set score: {'pearson_r2_score': 0.9797902109595925}
-    test set score: {'pearson_r2_score': 0.7014179421837455}
+
+    Training set score: {'roc_auc_score': 0.9697383576717953}
+    Test set score: {'roc_auc_score': 0.689795739440305}
 
 
+如果GPU内存不够会影响模型的性能？
 
 
+完整代码如下：
 
 
+.. code-block:: console 
 
+    import deepchem as dc 
+    tasks, datasets, transformers = dc.molnet.load_tox21(featurizer='GraphConv')
+    train_dataset, valid_dataset, test_dataset = datasets
 
+    n_tasks = len(tasks)
+    model = dc.models.GraphConvModel(n_tasks, mode='classification')
+    model.fit(train_dataset, nb_epoch=50)
 
-
-
+    metric = dc.metrics.Metric(dc.metrics.roc_auc_score)
+    print('Training set score:', model.evaluate(train_dataset, [metric], transformers))
+    print('Test set score:', model.evaluate(test_dataset, [metric], transformers))
