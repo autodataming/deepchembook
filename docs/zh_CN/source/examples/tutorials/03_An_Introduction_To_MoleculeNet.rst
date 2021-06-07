@@ -1,4 +1,4 @@
-DeepChem教程3：MoleculeNet的介绍
+DeepChem教程03：MoleculeNet的介绍
 ==========================================================
 欢迎来到DeepChem的介绍教程3——MoleculeNet数据集合的介绍。
 我们将通过一系列的教程让你更全面的了解DeepChem工具，
